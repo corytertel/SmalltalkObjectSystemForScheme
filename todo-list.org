@@ -1,0 +1,76 @@
+
+This development environment essentially "hijacks" your desktop environment, making your computer into a truly immersive development environment.
+* Todo
+*** Guides
+**** Style guide
+**** Use of objects guide
+**** Thought process of how to program guide
+**** Design pattern guide
+*** Error handling system
+**** Errors are objects that tell that they do not understand what you are asking them to do
+*** Class "browser" like in Smalltalk
+
+
+
+
+Objects should be simple in how we use them, not promote complexity.
+
+It's not the idea that's bad, it's just how most people use it.
+
+Don't make a class just for the sake of making a class. Don't make a class just because you have a new idea in the system. Make a class when you need grouped data and/or functionality.
+
+Just because something is organized doesn't mean it's easy to use.
+
+"OO is not about objects, it's about messages." A message is just a function call. OO is just about functions?
+
+
+
+What's the difference between a class and a function?
+With a class it's just a function that stores data. Does that data need to be stored?
+
+Are the use cases of every class just used for a function that needs to store data?
+
+Maybe, don't ever use classes, use closures?
+
+Example: a functionality to access a database can be simplified by using a singleton class or a closed function.
+Both would store the necessary database connect info so it's not needed to be input every time. If all you need to do is use that one function, then a closure is nice. But if you need many functions to act on that data, then a class becomes much better.
+
+
+
+Now, what's the difference between coupled and uncoupled data?
+Example:
+~db.connect()~ vs ~connect(db)~
+
+Is it just syntax? Is it a mentality?
+
+It's different:
+While it is mostly syntax, with one the class "owns" the function, and the other the class does not. This gives the function access to the inside parts of the class whereas with the other the function is limited to using the class by it's public interface. Less encapsulation/information hiding with the unowned version.
+
+Need to come up with way to call method as in the normal function syntax, but still have access to private data?
+But with a separate syntax it might be a clue to using encapsulated data?
+But does the user really care about the distinction?
+
+Everything you can do with one, you can do with the other. It's just a matter of encapsulation.
+
+Java and C++ choose to make the distinction between methods and functions through syntax. But is there a need?
+No. It may make it clearer for the programmer as what's a method and what's a function. But in a true OO language there is no distinction. Languages may make this distinction as it's easier to parse. There is no need for dispatching. And it is clear that a method belongs to that object. But if you think of every function call as a message, then there is no difference. If however you implement methods to have syntax of functions, dispatching is required.
+
+
+Pros and Cons of both object-orientation and primitives
+
+
+Examples of OO benefits:
+- Database connection (a singleton class that stores the connection info and handles complex communication logic)
+- Information hiding (encapsulation)
+- Increases productivity with less rewriting code and easier refactorization
+
+
+Examples of OO annoyances:
+- Arithmetic
+i.e.
+ ~5.+(7)~ instead of just ~5 + 7~
+~5.max(7)~ instead of just ~max(5 7)~
+these are unnatural, or are they?
+- Sometimes spend too much time in the abstraction instead of just doing
+but is this just an example of bad OO?
+- Can be more verbose
