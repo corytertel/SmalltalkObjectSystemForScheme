@@ -1,6 +1,19 @@
 
 This development environment essentially "hijacks" your desktop environment, making your computer into a truly immersive development environment.
 * Todo
+*** Figure out
+**** how to organize objects in scheme
+**** how to store objects on your system in scheme
+**** the syntax of how to use objects and messaging in scheme
+**** how objects are stored in scheme
+**** use objects or functions?
+**** the relationship between objects and first class functions
+**** how objects and first class functions are able to work well together
+**** function oriented programming?
+**** for example, how does functions like 'map' work into OO
+**** figure out how mutability will work with ~set!~
+**** are getters and setters OO? no
+**** is MVC OO?
 *** Guides
 **** Style guide
 **** Use of objects guide
@@ -9,8 +22,6 @@ This development environment essentially "hijacks" your desktop environment, mak
 *** Error handling system
 **** Errors are objects that tell that they do not understand what you are asking them to do
 *** Class "browser" like in Smalltalk
-
-
 
 
 Objects should be simple in how we use them, not promote complexity.
@@ -74,3 +85,59 @@ these are unnatural, or are they?
 - Sometimes spend too much time in the abstraction instead of just doing
 but is this just an example of bad OO?
 - Can be more verbose
+
+
+
+*Pros and Cons of Universal Naming Style*
+i.e. ~(ref lst 4)~ vs ~(list-ref lst 4)~
+Pros of universal naming:
+- Very flexible with refactoring
+- Don't need to memorize a lot of names
+- Dispatches over many different types (handles dispatching internally
+- Can be used in many situations, potentially sorting code
+- More readable in the sense that it is less verbose (the type is not on the screen)
+Example:
+~(ref x 4)~
+vs
+~(cond ((array? x) (array-ref x 4))~
+~((list? x) (list-ref x 4))~
+~(else (error "Wrong type")))~
+- Can potentially handle errors better
+- Easy to deal with inheritance overriding methods
+Pro of type-specific naming:
+- Strict with types
+- Consistent
+- Simple
+- Does not need to redefine parts of the language (more transferable to other users)
+- Potentially more consistent (the dispatching version might be inconstant with its behavior over types)
+- More readable in the sense that the type is explicit (you know exactly what type to expect and what is going on)
+- Doesn't need to redefine most of the built-in methods
+- Doesn't deal with naming problems with dispatching
+- Is clear that the code that will be performed is unique to that specific type
+- Clear and easy to use with recursion
+
+
+OO is about modularity. Not everything needs to be an object. Just everything you do should be consistent. Primitives are fine. However, although numbers in scheme are not objects by definition (they don't bundle data and behavior together), by usage it's similar to the goal of OO because they are completely modular (the internal logic and data of each number cannot be accessed from outside the number) (nothing can rely on the internal logic of arithmetic).
+
+Primitives are fine because by definition they are modular. If something is a primitive, it means that the language has implemented the details and data for it within the language definition. You cannot access the raw data or implementation details for primitives. Your code cannot rely on the internal implementation details of primitives. Therefore primitives are modular and fit within the OO paradigm. Whether primitives should follow the same syntax as the rest of the language is up for debate, but primitives fit the purpose of OO (modularity).
+
+
+
+Don't ever set a value that was returned by another function. This can lead to changing values inside black boxes without using the appropriate messaging and breaking your program by stepping over encapsulation boundaries.
+
+
+Scheme functions that have problems being overridden:
+- display
+- set!
+- set-car!
+- set-cdr!
+- display
+- print
+- equal?
+
+
+Do not override primitive functions, such as
+- cons
+- eq?, eqv?, equal?
+- display, print
+- set!, set-car!, set-cdr!
